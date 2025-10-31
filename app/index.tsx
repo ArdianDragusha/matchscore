@@ -4,6 +4,7 @@ import Home from './(tabs)/home'
 import Settings from './(tabs)/settings'
 import Results from './(tabs)/results'
 import Favorites from './(tabs)/favorites';
+import Standings from './(tabs)/standings';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,6 +24,8 @@ export default function App() {
                     iconName = 'heart'
                 } else if (route.name === 'Results') {
                     iconName = 'trophy'
+                } else if (route.name === 'Standings') {
+                    iconName = 'list'
                 }
 
                 return <Ionicons name={iconName} size={size} color={color} />;   //it returns an icon component
@@ -30,6 +33,7 @@ export default function App() {
         })}>
             <Tab.Screen name="Home" component={Home} />
             <Tab.Screen name="Results" component={Results} />
+            <Tab.Screen name="Standings" component={Standings} />
             <Tab.Screen name="Favorites" component={Favorites} />
             <Tab.Screen name="Settings" component={Settings} />
         </Tab.Navigator>
