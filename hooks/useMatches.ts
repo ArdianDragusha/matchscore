@@ -1,78 +1,62 @@
+import { EXPO_PUBLIC_FOOTBALL_DATA_API_KEY } from '@env';
 import { useEffect, useState } from 'react';
 
-// Try to read API key safely from globalThis or process.env
-const FOOTBALL_DATA_API_KEY: string | undefined =
-    (globalThis as any).FOOTBALL_DATA_API_KEY ??
-    (typeof process !== 'undefined' ? process.env.FOOTBALL_DATA_API_KEY : undefined);
+const FOOTBALL_DATA_API_KEY: string | undefined = EXPO_PUBLIC_FOOTBALL_DATA_API_KEY;
 
 type Match = {
     homeTeam: string;
     awayTeam: string;
-    time: string;
+    homeScore: number | null;
+    awayScore: number | null;
+    minute: number | null;
 };
-
 type MatchesByLeague = Record<string, Match[]>;
 
-export default function useMatches() {
+export default function useLiveMatches() {
     const [matchesByLeague, setMatchesByLeague] = useState<MatchesByLeague>({});
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchMatches = async () => {
-            if (!FOOTBALL_DATA_API_KEY) {
-                console.error("⚠️ Missing API key! Make sure FOOTBALL_DATA_API_KEY is set.");
-            }
-
-            // Use local date (not UTC) to avoid skipping matches
-            const today = new Date();
-            const dateFrom = today.toLocaleDateString('en-CA'); // YYYY-MM-DD format in local time
-
-            const tomorrow = new Date(today);
-            tomorrow.setDate(today.getDate() + 1);
-            const dateTo = tomorrow.toLocaleDateString('en-CA');
-
+        const fetchLiveMatches = async () => {
             const headers: HeadersInit = FOOTBALL_DATA_API_KEY
                 ? { 'X-Auth-Token': FOOTBALL_DATA_API_KEY }
                 : {};
 
-            try {
-                const url = `https://api.football-data.org/v4/matches?dateFrom=${dateFrom}&dateTo=${dateTo}`;
-                console.log('📡 Fetching:', url);
-                const response = await fetch(url, { headers });
+            const response = await fetch(
+                `https://api.football-data.org/v4/matches?status=IN_PLAY`,
+                { headers }
+            );
 
-                console.log('Response status:', response.status);
-
-                if (!response.ok) {
-                    console.error('❌ Failed to fetch matches', response.status);
-                    setMatchesByLeague({});
-                    return;
-                }
-
-                const data = await response.json();
-                const matches = data.matches || [];
-                console.log(`✅ Found ${matches.length} matches`);
-
-                const grouped = matches.reduce((acc: MatchesByLeague, m: any) => {
-                    const league = m.competition?.name ?? 'Unknown';
-                    if (!acc[league]) acc[league] = [];
-                    acc[league].push({
-                        homeTeam: m.homeTeam?.name ?? '',
-                        awayTeam: m.awayTeam?.name ?? '',
-                        time: new Date(m.utcDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-                    });
-                    return acc;
-                }, {} as MatchesByLeague);
-
-                setMatchesByLeague(grouped);
-            } catch (err) {
-                console.error('⚠️ Error fetching matches:', err);
+            if (!response.ok) {
+                console.error('Failed to fetch live matches', response.status);
                 setMatchesByLeague({});
-            } finally {
                 setLoading(false);
+                return;
             }
+
+            const data = await response.json();
+            const matches = data.matches || [];
+            const grouped = matches.reduce((acc: MatchesByLeague, m: any) => {
+                const league = m.competition?.name ?? 'Unknown';
+                if (!acc[league]) acc[league] = [];
+                acc[league].push({
+                    homeTeam: m.homeTeam?.name ?? '',
+                    awayTeam: m.awayTeam?.name ?? '',
+                    homeScore: m.score?.fullTime?.home ?? m.score?.halfTime?.home ?? 0,
+                    awayScore: m.score?.fullTime?.away ?? m.score?.halfTime?.away ?? 0,
+                    minute: m.minute ?? null,
+                });
+                return acc;
+            }, {} as MatchesByLeague);
+
+            setMatchesByLeague(grouped);
+            setLoading(false);
         };
 
-        fetchMatches();
+        fetchLiveMatches();
+        const interval = setInterval(fetchLiveMatches, 30000);
+
+        return () => clearInterval(interval);
     }, []);
 
     return { matchesByLeague, loading };

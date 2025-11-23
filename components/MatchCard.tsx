@@ -4,15 +4,21 @@ interface MatchProps {
     match: {
         homeTeam: string;
         awayTeam: string;
-        time: string;
-    }
+        homeScore: number | null;
+        awayScore: number | null;
+        minute: number | null;
+    };
 }
 
-export default function MatchCard({ match }: MatchProps) {
+export default function LiveMatchCard({ match }: MatchProps) {
     return (
         <View style={{ padding: 8, flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Text>{match.homeTeam} vs {match.awayTeam}</Text>
-            <Text>{match.time}</Text>
+            <Text>
+                {match.homeTeam} {match.homeScore} - {match.awayScore} {match.awayTeam}
+            </Text>
+            <Text style={{ color: 'red' }}>
+                {match.minute ? `${match.minute}'` : '—'}
+            </Text>
         </View>
     );
 }
