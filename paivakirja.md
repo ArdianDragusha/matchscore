@@ -50,3 +50,8 @@ loppuun asti.
 molemmat sivut näyttävät. Nyt odottelen viikonlopun otteluita jotta pääsisin näkemään, että toimiiko live.tsx sivu ja miltä
 results.tsx sivu näyttää. Standings.tsx sivu on myös valmis, näkyy top 5 liigat ja mestarienliiga lohko.
 
+21-23/11/2025: Tällä viikonlopulla oli sen verran otteluita, että pääsin vihdoin näkemään kaikki
+minun sivut toimimassa ensimmäistä kertaa. Eli nyt sain tehtyä live.tsx ja results.tsx sivut loppuun. Results.tsx sivulla on myös favorite tähti. 
+Korjasin myös _layout.tsx tiedoston, ettei minulla näkysi sivullsa "index", mutta vaan se sivu mikä on auki, joka teki ohjelmasta paljon hienomman mielestäni.
+
+25/11/2025: Lisäsin vähän tyylitystä, boxit joiden sisällä matsit sisältyvät nyt kulmat ovat pyöreämpiä ja backshadow löytyy. Standings.tsx sivulle tein että pisteet ovat eri värisiä jotta on helmpompi nähdä kuinka monta pistettä joukkueella on.
