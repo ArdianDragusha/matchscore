@@ -1,3 +1,4 @@
+import { EXPO_PUBLIC_FOOTBALL_DATA_API_KEY } from "@env";
 import React, { useEffect, useState } from "react";
 import {
     ActivityIndicator,
@@ -7,7 +8,6 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
-import { EXPO_PUBLIC_FOOTBALL_DATA_API_KEY } from "@env";
 
 const LEAGUES = [
     { id: "PL", name: "Premier League" },
@@ -123,51 +123,64 @@ const styles = StyleSheet.create({
     },
     list: {
         padding: 10,
-        backgroundColor: "#fff",
+        backgroundColor: "#f6f8fa",
         paddingBottom: 40,
     },
     leagueCard: {
-        backgroundColor: "#f8f8f8",
-        borderRadius: 10,
-        padding: 15,
-        marginBottom: 10,
-        elevation: 3,
+        backgroundColor: "#fff",
+        borderRadius: 16,
+        padding: 18,
+        marginBottom: 14,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.08,
+        shadowRadius: 8,
+        elevation: 4,
     },
     leagueTitle: {
-        fontSize: 20,
+        fontSize: 24,
         fontWeight: "bold",
         textAlign: "center",
         color: "#007AFF",
+        letterSpacing: 0.5,
+        marginBottom: 2,
     },
     table: {
-        marginTop: 10,
+        marginTop: 12,
     },
     tableHeader: {
         flexDirection: "row",
         borderBottomWidth: 1,
         borderBottomColor: "#ccc",
-        paddingBottom: 4,
-        marginBottom: 4,
+        paddingBottom: 6,
+        marginBottom: 6,
+        backgroundColor: "#f0f4fa",
+        borderRadius: 6,
     },
     row: {
         flexDirection: "row",
         borderBottomWidth: 0.5,
         borderBottomColor: "#eee",
-        paddingVertical: 3,
+        paddingVertical: 5,
     },
     cell: {
         flex: 1,
-        fontSize: 13,
+        fontSize: 15,
         textAlign: "center",
+        color: "#22223b",
     },
     team: {
         flex: 3,
         textAlign: "left",
+        fontWeight: "500",
     },
     rank: {
         flex: 0.5,
+        color: "#007AFF",
+        fontWeight: "bold",
     },
     bold: {
         fontWeight: "bold",
+        color: "#007AFF",
     },
 });

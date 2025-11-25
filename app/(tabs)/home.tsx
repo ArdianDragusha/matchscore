@@ -1,3 +1,6 @@
+import { EXPO_PUBLIC_FOOTBALL_DATA_API_KEY } from "@env";
+import { Ionicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
 import {
     ActivityIndicator,
@@ -5,12 +8,9 @@ import {
     Image,
     StyleSheet,
     Text,
-    View,
     TouchableOpacity,
+    View,
 } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Ionicons } from "@expo/vector-icons";
-import { EXPO_PUBLIC_FOOTBALL_DATA_API_KEY } from "@env";
 
 const API_URL = "https://api.football-data.org/v4/matches";
 
@@ -143,23 +143,80 @@ export default function Home() {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: "#fff", paddingTop: 50 },
+    container: {
+        flex: 1,
+        backgroundColor: "#f6f8fa",
+        paddingTop: 50,
+        paddingHorizontal: 0,
+    },
     loader: { marginTop: 100 },
-    error: { textAlign: "center", color: "red", marginTop: 40 },
-    title: { fontSize: 24, textAlign: "center", marginBottom: 10, fontWeight: "bold" },
+    error: {
+        textAlign: "center",
+        color: "#e74c3c",
+        marginTop: 40,
+        fontSize: 16,
+        fontWeight: "500",
+    },
+    title: {
+        fontSize: 28,
+        textAlign: "center",
+        marginBottom: 18,
+        fontWeight: "bold",
+        color: "#22223b",
+        letterSpacing: 0.5,
+    },
     card: {
-        backgroundColor: "#f0f0f0",
-        padding: 15,
-        margin: 10,
-        borderRadius: 10,
-        elevation: 3,
+        backgroundColor: "#fff",
+        padding: 20,
+        marginHorizontal: 16,
+        marginVertical: 10,
+        borderRadius: 16,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.08,
+        shadowRadius: 8,
+        elevation: 4,
         position: "relative",
     },
-    starButton: { position: "absolute", right: 10, top: 10, zIndex: 10 },
-    row: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
+    starButton: {
+        position: "absolute",
+        right: 16,
+        top: 16,
+        zIndex: 10,
+    },
+    row: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: 10,
+    },
     team: { flex: 1, alignItems: "center" },
-    logo: { width: 40, height: 40, marginBottom: 5 },
-    vs: { fontSize: 18, fontWeight: "bold" },
-    time: { textAlign: "center", marginTop: 10, color: "#007AFF" },
-    competition: { textAlign: "center", color: "#777", marginTop: 5 },
+    logo: {
+        width: 48,
+        height: 48,
+        marginBottom: 6,
+        borderRadius: 24,
+        backgroundColor: "#e0e7ef",
+    },
+    vs: {
+        fontSize: 20,
+        fontWeight: "bold",
+        color: "#007AFF",
+        marginHorizontal: 8,
+    },
+    time: {
+        textAlign: "center",
+        marginTop: 10,
+        color: "#007AFF",
+        fontWeight: "600",
+        fontSize: 16,
+        letterSpacing: 0.5,
+    },
+    competition: {
+        textAlign: "center",
+        color: "#6c757d",
+        marginTop: 5,
+        fontSize: 14,
+        fontWeight: "500",
+    },
 });

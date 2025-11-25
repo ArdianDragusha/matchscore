@@ -1,3 +1,6 @@
+import { EXPO_PUBLIC_FOOTBALL_DATA_API_KEY } from "@env";
+import { Ionicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
 import {
     ActivityIndicator,
@@ -5,12 +8,9 @@ import {
     Image,
     StyleSheet,
     Text,
-    View,
     TouchableOpacity,
+    View,
 } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Ionicons } from "@expo/vector-icons";
-import { EXPO_PUBLIC_FOOTBALL_DATA_API_KEY } from "@env";
 
 const API_URL = "https://api.football-data.org/v4/matches?status=FINISHED";
 
@@ -79,7 +79,7 @@ export default function Results() {
         const time = new Date(item.utcDate).toLocaleDateString();
 
         const isFav = favourites.some((m: any) => m.id === item.id);
-    
+
 
         return (
             <View style={styles.card}>
@@ -129,22 +129,68 @@ export default function Results() {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, paddingTop: 50, backgroundColor: "#fff" },
+    container: {
+        flex: 1,
+        paddingTop: 50,
+        backgroundColor: "#f6f8fa",
+    },
     loader: { marginTop: 100 },
-    error: { textAlign: "center", color: "red", marginTop: 40 },
-    title: { fontSize: 24, fontWeight: "bold", textAlign: "center", marginBottom: 10 },
+    error: {
+        textAlign: "center",
+        color: "#e74c3c",
+        marginTop: 40,
+        fontSize: 16,
+        fontWeight: "500",
+    },
+    title: {
+        fontSize: 28,
+        fontWeight: "bold",
+        textAlign: "center",
+        marginBottom: 18,
+        color: "#22223b",
+        letterSpacing: 0.5,
+    },
     card: {
-        padding: 15,
-        margin: 10,
-        backgroundColor: "#f3f3f3",
-        borderRadius: 10,
+        padding: 20,
+        marginHorizontal: 16,
+        marginVertical: 10,
+        backgroundColor: "#fff",
+        borderRadius: 16,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.08,
+        shadowRadius: 8,
+        elevation: 4,
         position: "relative",
     },
-    starButton: { position: "absolute", right: 10, top: 10 },
-    comp: { textAlign: "center", color: "#777", marginBottom: 5 },
-    row: { flexDirection: "row", alignItems: "center", justifyContent: "space-between" },
+    starButton: { position: "absolute", right: 16, top: 16, zIndex: 10 },
+    comp: {
+        textAlign: "center",
+        color: "#6c757d",
+        marginBottom: 5,
+        fontWeight: "500",
+        fontSize: 14,
+    },
+    row: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        marginBottom: 8,
+    },
     team: { alignItems: "center", flex: 1 },
-    logo: { width: 40, height: 40, marginBottom: 5 },
-    score: { fontSize: 20, fontWeight: "bold" },
-    time: { textAlign: "center", marginTop: 8, color: "#007AFF" },
+    logo: {
+        width: 48,
+        height: 48,
+        marginBottom: 6,
+        borderRadius: 24,
+        backgroundColor: "#e0e7ef",
+    },
+    score: { fontSize: 22, fontWeight: "bold", color: "#007AFF" },
+    time: {
+        textAlign: "center",
+        marginTop: 8,
+        color: "#007AFF",
+        fontWeight: "600",
+        fontSize: 15,
+    },
 });

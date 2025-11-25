@@ -1,6 +1,6 @@
+import { EXPO_PUBLIC_FOOTBALL_DATA_API_KEY } from "@env";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, Image, StyleSheet, Text, View } from "react-native";
-import { EXPO_PUBLIC_FOOTBALL_DATA_API_KEY } from "@env";
 
 const API_URL = "https://api.football-data.org/v4/matches?status=IN_PLAY";
 
@@ -91,28 +91,61 @@ export default function Live() {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: "#fff", paddingTop: 50 },
+    container: {
+        flex: 1,
+        backgroundColor: "#f6f8fa",
+        paddingTop: 50,
+    },
     loader: { marginTop: 100 },
-    error: { textAlign: "center", marginTop: 40, color: "red" },
-    title: { fontSize: 24, fontWeight: "bold", textAlign: "center", marginBottom: 10 },
+    error: {
+        textAlign: "center",
+        marginTop: 40,
+        color: "#e74c3c",
+        fontSize: 16,
+        fontWeight: "500",
+    },
+    title: {
+        fontSize: 28,
+        fontWeight: "bold",
+        textAlign: "center",
+        marginBottom: 18,
+        color: "#22223b",
+        letterSpacing: 0.5,
+    },
     list: { paddingHorizontal: 10, paddingBottom: 40 },
     card: {
-        backgroundColor: "#f8f8f8",
-        padding: 15,
-        borderRadius: 10,
-        marginVertical: 8,
-        elevation: 3,
+        backgroundColor: "#fff",
+        padding: 20,
+        borderRadius: 16,
+        marginVertical: 10,
+        marginHorizontal: 8,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.08,
+        shadowRadius: 8,
+        elevation: 4,
     },
-    competition: { textAlign: "center", color: "#666", marginBottom: 8 },
+    competition: {
+        textAlign: "center",
+        color: "#6c757d",
+        marginBottom: 8,
+        fontWeight: "500",
+        fontSize: 14,
+    },
     row: {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
     },
     team: { flex: 1, alignItems: "center" },
-    teamName: { fontSize: 14, marginTop: 4 },
-    logo: { width: 40, height: 40 },
-    scoreBox: { alignItems: "center", paddingHorizontal: 10 },
-    score: { fontSize: 22, fontWeight: "bold" },
-    minute: { marginTop: 4, fontSize: 14, fontWeight: "600", color: "red" },
+    teamName: { fontSize: 15, marginTop: 6, fontWeight: "600" },
+    logo: {
+        width: 48,
+        height: 48,
+        borderRadius: 24,
+        backgroundColor: "#e0e7ef",
+    },
+    scoreBox: { alignItems: "center", paddingHorizontal: 14 },
+    score: { fontSize: 24, fontWeight: "bold", color: "#007AFF" },
+    minute: { marginTop: 4, fontSize: 15, fontWeight: "700", color: "#e74c3c" },
 });
