@@ -55,3 +55,5 @@ minun sivut toimimassa ensimmäistä kertaa. Eli nyt sain tehtyä live.tsx ja re
 Korjasin myös _layout.tsx tiedoston, ettei minulla näkysi sivullsa "index", mutta vaan se sivu mikä on auki, joka teki ohjelmasta paljon hienomman mielestäni.
 
 25/11/2025: Lisäsin vähän tyylitystä, boxit joiden sisällä matsit sisältyvät nyt kulmat ovat pyöreämpiä ja backshadow löytyy. Standings.tsx sivulle tein että pisteet ovat eri värisiä jotta on helmpompi nähdä kuinka monta pistettä joukkueella on.
+
+26/11/2025: Vähän lisää siivoamista projekti näkymässä ja poistettu turhaa koodia ja tiedostoja. Palautetaan nyt.
