@@ -34,7 +34,6 @@ export default function Live() {
     useEffect(() => {
         fetchMatches();
 
-        // 🔄 Auto-update joka 30 sekuntia
         const interval = setInterval(fetchMatches, 30000);
         return () => clearInterval(interval);
     }, []);

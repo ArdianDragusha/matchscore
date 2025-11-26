@@ -20,7 +20,6 @@ export default function Home() {
     const [error, setError] = useState<string | null>(null);
     const [favourites, setFavourites] = useState<any[]>([]);
 
-    // Load saved favourites
     const loadFavourites = async () => {
         const stored = await AsyncStorage.getItem("favourites");
         setFavourites(stored ? JSON.parse(stored) : []);
@@ -30,7 +29,6 @@ export default function Home() {
         loadFavourites();
     }, []);
 
-    // Add or remove a favourite
     const toggleFavourite = async (match: any) => {
         const exists = favourites.some((m: any) => m.id === match.id);
 
@@ -42,7 +40,6 @@ export default function Home() {
         await AsyncStorage.setItem("favourites", JSON.stringify(updated));
     };
 
-    // Fetch matches
     useEffect(() => {
         const fetchMatches = async () => {
             try {
@@ -56,7 +53,6 @@ export default function Home() {
                 console.log("ALL MATCHES RECEIVED:", data.matches?.length);
 
                 if (Array.isArray(data.matches)) {
-                    // Filter only upcoming matches
                     const upcoming = data.matches.filter(
                         (m: any) =>
                             m.status === "SCHEDULED" ||
@@ -83,7 +79,6 @@ export default function Home() {
     if (loading) return <ActivityIndicator style={styles.loader} size="large" color="#007AFF" />;
     if (error) return <Text style={styles.error}>{error}</Text>;
 
-    // Render each match
     const renderItem = ({ item }: any) => {
         const home = item.homeTeam;
         const away = item.awayTeam;
@@ -97,7 +92,6 @@ export default function Home() {
 
         return (
             <View style={styles.card}>
-                {/* Favourite Button */}
                 <TouchableOpacity
                     style={styles.starButton}
                     onPress={() => toggleFavourite(item)}
